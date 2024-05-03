@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import PokemonImage from "./PokemonImage";
-import Image from "next/image";
+import PokemonImage from "./PokemonImage";
 
 export default function SearchBar() { 
   const [pokemonData, setPokemonData] = useState<any[]>([]);
@@ -34,19 +33,24 @@ export default function SearchBar() {
   return (
     <div className="container mx-auto px-6 py-4 bg-blue-100">
       <div className="flex items-center py-4">
-        <input type="text" placeholder="Pokemon Search" className="text-black rounded-l py-2 px-4 w-1/2 shadow-md rounded" />
-        <button className="ml-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 mx-4 rounded-r shadow-md rounded">Search</button>
+        <input
+          type="text"
+          placeholder="Pokemon Search"
+          className="text-black rounded-l py-2 px-4 w-1/2 shadow-md rounded"
+        />
+        <button
+          className="ml-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 mx-4 rounded-r shadow-md rounded"
+        >Search</button>
       </div>
       <div className="bg-white flex shadow-md rounded p-4 overflow-x-auto whitesace-nowrap">
         {loading 
           ? <div className="text-black h-[100px] w-[100px] mx-4 flex items-center justify-center shadow-md text-gray-400">Loading...</div>
           : pokemonData.map(pokemon => (
-            <img key={pokemon.id} className="text-black h-[100px] w-[100px] mx-4 flex items-center justify-center shadow-md" src={pokemon.sprites.other['official-artwork'].front_default} alt="Pokemon" />
-            // <Image key={pokemon.id} className="text-black h-[100px] w-[100px] mx-4 flex items-center justify-center shadow-md" src={pokemon.sprites.other['official-artwork'].front_default} alt="Pokemon"/>
+            <PokemonImage pokemon={pokemon}/>
           ))
         }
         {offset < maxPokemon && (
-          <button onClick={fetchPokemon} className="text-black h-[100px] w-[100px] flex shadow-md items-center justify-center">
+          <button onClick={fetchPokemon} className="text-black h-[100px] w-[100px] mx-4 flex items-center justify-center shadow-md">
               追加表示
           </button>
         )}
