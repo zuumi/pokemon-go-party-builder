@@ -9,7 +9,7 @@ export default function SearchBar() {
   const [loading, setLoading] = useState<boolean>(true);
   const [offset, setOffset] = useState<number>(0);
   const loadLimit = 20;
-  const maxPokemon = 1025;
+  const maxPokemon = 1302;
 
   useEffect(() => {
     fetchPokemon();
