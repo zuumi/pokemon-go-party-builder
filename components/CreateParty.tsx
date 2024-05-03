@@ -6,8 +6,8 @@ export default function CreateParty() {
     <div className="container mx-auto px-6 py-4 bg-blue-100 shadow-md rounded h-full">
       <div className="container mx-auto py-4">
         <div className="flex items-center bg-blue-100">
-          <input type="text" placeholder="Party Name" className="text-black rounded-l py-2 px-4 w-1/2 shadow-md rounded" />
           {/* Comming Soooooon!!! */}
+          {/* <input type="text" placeholder="Party Name" className="text-black rounded-l py-2 px-4 w-1/2 shadow-md rounded" /> */}
           {/* <button className="ml-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 mx-4 rounded-r shadow-md rounded">Create</button> */}
         </div>
       </div>

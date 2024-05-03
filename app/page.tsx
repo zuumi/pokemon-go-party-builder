@@ -1,5 +1,5 @@
 import Header from '../components/Header';
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../components/SearchBar.client';
 import CreateParty from '../components/CreateParty';
 import Advertisement from '../components/Advertisement';
 import Footer from '../components/Footer';
