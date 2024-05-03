@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import PokemonImage from "./PokemonImage";
+import Image from "next/image";
 
 export default function SearchBar() { 
   const [pokemonData, setPokemonData] = useState<any[]>([]);
@@ -41,10 +42,11 @@ export default function SearchBar() {
           ? <div className="text-black h-[100px] w-[100px] mx-4 flex items-center justify-center shadow-md text-gray-400">Loading...</div>
           : pokemonData.map(pokemon => (
             <img key={pokemon.id} className="text-black h-[100px] w-[100px] mx-4 flex items-center justify-center shadow-md" src={pokemon.sprites.other['official-artwork'].front_default} alt="Pokemon" />
+            // <Image key={pokemon.id} className="text-black h-[100px] w-[100px] mx-4 flex items-center justify-center shadow-md" src={pokemon.sprites.other['official-artwork'].front_default} alt="Pokemon"/>
           ))
         }
         {offset < maxPokemon && (
-          <button onClick={fetchPokemon} className="text-black h-[100px] w-[100px] flex shadow-md">
+          <button onClick={fetchPokemon} className="text-black h-[100px] w-[100px] flex shadow-md items-center justify-center">
               追加表示
           </button>
         )}
