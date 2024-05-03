@@ -1,8 +1,8 @@
-import Header from '../components/Header';
+import Header from '../components/Common/Header';
 import SearchBar from '../components/SearchBar.client';
 import CreateParty from '../components/CreateParty';
 import Advertisement from '../components/Advertisement';
-import Footer from '../components/Footer';
+import Footer from '../components/Common/Footer';
 
 export default function Home() {
   return (
