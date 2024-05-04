@@ -6,9 +6,10 @@ import PokemonImage from "./PokemonImage";
 
 export default function SearchBar() { 
   const [loading, setLoading] = useState<boolean>(true);
+  const [filtering, setFiltering] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [pokemonGoData, setPokemonGoData] = useState<any[]>([]);
-  const [pokemonGoReginData, setPokemonGoReginData] = useState();
+  const [filteredPokemonGoData, setFilteredPokemonGoData] = useState<any[]>([]);
 
   useEffect(() => {
     try {
@@ -18,7 +19,22 @@ export default function SearchBar() {
     }
   }, []);
 
-  console.log(pokemonGoData);
+  useEffect(() => {
+    if (filtering) {
+      const foundPokemon = pokemonGoData.find(
+        (pokemon: any) => {
+          return pokemon.names.Japanese === searchTerm ? pokemon: null
+        });
+      if (foundPokemon) {
+        setFilteredPokemonGoData([foundPokemon]);
+      } else {
+        console.log("No matching Pokémon found.");
+        setFilteredPokemonGoData([]);
+      }
+      setLoading(false);
+    }
+  }, [filtering, searchTerm, pokemonGoData]);
+
   const fetchPokemonGoData = async () => {
     try{
       const response = await axios.get(`https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex.json`);
@@ -49,16 +65,10 @@ export default function SearchBar() {
     }
   };
 
-  // const handleSearch = () => {
-  //   const foundPokemon = pokemonNames.find(poke => poke.japaneseName === searchTerm);
-  //   if (foundPokemon) {
-  //     console.log(foundPokemon.englishName);
-  //     fetchPokemonImageByName(foundPokemon.englishName);
-  //   } else {
-  //     console.log("No matching Pokémon found.");
-  //     setPokemonData([]);
-  //   }
-  // };
+  const handleSearch = () => {
+    setLoading(true);
+    setFiltering(true);
+  };
 
   return (
     <div className="container mx-auto px-6 py-4 bg-blue-100">
@@ -72,16 +82,27 @@ export default function SearchBar() {
         />
         <button
           className="ml-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 mx-4 rounded-r shadow-md rounded"
-          // onClick={handleSearch}
+          onClick={handleSearch}
         >Search</button>
       </div>
       <div className="bg-white flex shadow-md rounded p-4 overflow-x-auto whitesace-nowrap">
-        {loading 
-          ? <div className="text-black h-[100px] w-[100px] mx-4 flex items-center justify-center shadow-md text-gray-400">Loading...</div>
-          : pokemonGoData.map(pokemon => (
-            <PokemonImage key={pokemon.dexNr} pokemon={pokemon}/>
-          ))
-        }
+      {loading && (
+        <div className="text-black h-[100px] w-[100px] mx-4 flex items-center justify-center shadow-md text-gray-400">
+          Loading...
+        </div>
+      )}
+
+      {!loading && filtering && (
+        filteredPokemonGoData.map((pokemon: any) => (
+          <PokemonImage key={pokemon.dexNr} pokemon={pokemon} />
+        ))
+      )}
+
+      {!loading && !filtering && (
+        pokemonGoData.map((pokemon: any) => (
+          <PokemonImage key={pokemon.dexNr} pokemon={pokemon} />
+        ))
+      )}
       </div>
     </div>
   );
