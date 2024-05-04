@@ -8,6 +8,7 @@ export default function SearchBar() {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [pokemonGoData, setPokemonGoData] = useState<any[]>([]);
+  const [pokemonGoReginData, setPokemonGoReginData] = useState();
 
   useEffect(() => {
     try {
@@ -21,16 +22,26 @@ export default function SearchBar() {
   const fetchPokemonGoData = async () => {
     try{
       const response = await axios.get(`https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex.json`);
-      const results = response.data.flatMap((pokemon: any) =>{
-        // if (pokemon.reginForms[`${pokemon.formId}_ALOHA`] && pokemon.reginForms[`${pokemon.formId}_GALARIAN`]) {
-        //   return [pokemon, ...pokemon.reginForms[`${pokemon.formId}_ALOHA`], ...pokemon.reginForms[`${pokemon.formId}_GALARIAN`]];
-        // } else if (pokemon.reginForms[`${pokemon.formId}_ALOHA`]) {
-        //   return [pokemon, ...pokemon.reginForms[`${pokemon.formId}_ALOHA`], ...pokemon.reginForms[`${pokemon.formId}_GALARIAN`]];
-        // } else if (pokemon.reginForms[`${pokemon.formId}_GALARIAN`]) {
-        //   return [pokemon, ...pokemon.reginForms[`${pokemon.formId}_ALOHA`], ...pokemon.reginForms[`${pokemon.formId}_GALARIAN`]];
-        // }
+      const results = response.data.map((pokemon: any) =>{
+        const alolaPokemon = pokemon.regionForms[`${pokemon.formId}_ALOLA`];
+        const galarianPokemon = pokemon.regionForms[`${pokemon.formId}_GALARIAN`];
+        const alolaInitNum = 10000;
+        const galarianInitNum = 20000;
+        if (alolaPokemon && galarianPokemon) {
+          alolaPokemon.dexNr = alolaInitNum + alolaPokemon.dexNr;
+          galarianPokemon.dexNr = galarianInitNum + galarianPokemon.dexNr;
+          return [pokemon, alolaPokemon, galarianPokemon];
+        }
+        else if (galarianPokemon) {
+          galarianPokemon.dexNr = galarianInitNum + galarianPokemon.dexNr;
+          return [pokemon, galarianPokemon];
+        }
+        else if (alolaPokemon) {
+          alolaPokemon.dexNr = alolaInitNum + alolaPokemon.dexNr;
+          return [pokemon, alolaPokemon];
+        }
         return pokemon;
-      });
+      }).flat();
       setPokemonGoData(results);
       setLoading(false);
     } catch(err) {
