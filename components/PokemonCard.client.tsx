@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import PokemonStatus from "./PokemonStatus";
 
 export default function PokemonCard({ image, setImage, pokemonGoData }) {
   const [pokemonId, setPokemonId] = useState<number>(0);
@@ -34,9 +35,19 @@ export default function PokemonCard({ image, setImage, pokemonGoData }) {
   };
 
   return (
-    <div className="bg-white shadow-md rounded p-4 w-[500px] h-[800px]">
+    <div className="bg-white shadow-md rounded px-4 pt-2 w-[500px] h-[820px]">
+      <div className="flex">
+        <div className="text-black flex mr-auto">{pokemonData && pokemonData.names.Japanese}</div>
+        <div className="text-black flex mr-2">MAXCP(Lv.50):{ pokemonData ? Math.floor(
+          ( (pokemonData.stats.attack+15) 
+            * Math.sqrt(pokemonData.stats.stamina+15)
+            * Math.sqrt(pokemonData.stats.defense+15)
+            * 0.8403
+          )/10
+        ): '0000'}</div>
+      </div>
       <div
-          className="bg-cover bg-center h-[300px] w-[300px] mx-auto mt-3 flex items-center justify-center"
+          className="bg-cover bg-center h-[300px] w-[300px] mx-auto flex items-center justify-center"
           style={{ backgroundImage: "url('/pokemonGG_backimage.jpeg')" }}
           onDragOver={handleDragOver}
           onDrop={handleDrop}
@@ -59,71 +70,8 @@ export default function PokemonCard({ image, setImage, pokemonGoData }) {
           )
         }
       </div>
-      <div className="h-[500px] w-[300px] py-10 mx-auto">
-        <div className="text-black py-4">
-          <p>タイプ１:{image && pokemonData.primaryType.names.Japanese}</p>
-          <p>{image && pokemonData.secondaryType && `タイプ２:${pokemonData.secondaryType.names.Japanese}`}</p>
-          <p>{image && !pokemonData.secondaryType && `-`}</p>
-        </div>
-        <label htmlFor="" className="text-black flex">
-          Normal 
-          <select className="block text-black w-full ml-4 mb-2 p-2 border rounded">
-            {
-              image && pokemonData.quickMoves &&
-              Object.values(pokemonData.quickMoves).map((quickMove: any, index: number) => {
-                  return (<option key={index} className="text-black">{quickMove.names.Japanese}</option>)
-                }
-              )
-            }
-            {
-              image && pokemonData.eliteQuickMoves &&
-              Object.values(pokemonData.eliteQuickMoves).map((quickMove: any, index: number) => {
-                  return (<option key={index} className="text-black">*{quickMove.names.Japanese}</option>)
-                }
-              )
-            }
-          </select>
-        </label>
-        <label htmlFor="" className="text-black flex">
-          Special1
-          <select className="block text-black w-full ml-2 mb-2 p-2 border rounded">
-            {
-              image && pokemonData.cinematicMoves &&
-              Object.values(pokemonData.cinematicMoves).map((cinematicMove: any, index: number) => {
-                return (<option key={index} className="text-black">{cinematicMove.names.Japanese}</option>)
-              })
-            }
-            {
-              image && pokemonData.eliteCinematicMoves &&
-              Object.values(pokemonData.eliteCinematicMoves).map((cinematicMove: any, index: number) => {
-                return (<option key={index} className="text-black">*{cinematicMove.names.Japanese}</option>)
-              })
-            }
-          </select>
-        </label>
-        <label htmlFor="" className="text-black flex">
-          Special2
-          <select className="block text-black w-full ml-2 mb-2 p-2 border rounded">
-            {
-              image && pokemonData.cinematicMoves &&
-              Object.values(pokemonData.cinematicMoves).map((cinematicMove: any, index: number) => {
-                return (<option key={index} className="text-black">{cinematicMove.names.Japanese}</option>)
-              })
-            }
-            {
-              image && pokemonData.eliteCinematicMoves &&
-              Object.values(pokemonData.eliteCinematicMoves).map((cinematicMove: any, index: number) => {
-                return (<option key={index} className="text-black">*{cinematicMove.names.Japanese}</option>)
-              })
-            }
-          </select>
-        </label>
-        <div className="text-black py-10 p-2">
-          <label htmlFor="">必要なターン数
-            <p>Special1: {`${3}-${4}-${5}`}</p>
-            <p>Special2: {`${3}-${4}-${5}`}</p>
-          </label>
-        </div>
+      <div className="h-[500px] w-[300px] pt-5 mx-auto">
+        <PokemonStatus pokemonData={pokemonData} image={image}/>
       </div>
     </div>
   );
