@@ -78,7 +78,10 @@ export default function SearchBar() {
           placeholder="ポケモンの名前を入力"
           className="text-black rounded-l py-2 px-4 w-1/2 shadow-md rounded"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setFiltering(false);
+          }}
         />
         <button
           className="ml-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 mx-4 rounded-r shadow-md rounded"
