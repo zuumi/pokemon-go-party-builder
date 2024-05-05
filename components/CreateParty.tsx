@@ -67,13 +67,14 @@ export default function CreateParty() {
           key={index}
           image={image}
           setImage={
-            (url: any) => handleSetImage(index, url)}
+            (url: any) => handleSetImage(index, url)
+          }
           pokemonGoData={pokemonGoData}
         />
       ))}
       </div>
-      <div className="bg-white shadow-md rounded p-4 my-4 h-[200px] w-full">
-        <PartyEvaluation />
+      <div className="bg-white shadow-md rounded p-4 my-4 h-auto w-full">
+        <PartyEvaluation/>
       </div>
     </div>
   );
