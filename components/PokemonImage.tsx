@@ -4,7 +4,6 @@ export default function PokemonImage({ pokemon }: {
     const handleDragStart = (e: any) => {
       e.dataTransfer.setData("text/plain", pokemon.dexNr);
     };
-    console.log();
     return (
       <img
         draggable="true"
