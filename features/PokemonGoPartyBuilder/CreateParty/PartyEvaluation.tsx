@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { chat } from './chatService'; // chatService.js から chat 関数をインポート
+import { ChatService } from "../Common/Service/ChatService";
 
 export default function PartyEvaluation() {
   const [responses, setResponses] = useState<string[]>([]);
@@ -14,7 +14,7 @@ export default function PartyEvaluation() {
     console.log("Sending prompt:", prompt);
 
     setIsLoading(true);
-    const apiResponse = await chat(prompt);
+    const apiResponse = await ChatService(prompt);
     if (apiResponse) {
       console.log("API Response:", apiResponse);
       setResponses(prevResponses => [...prevResponses, apiResponse]); // 既存の応答リストに新しい応答を追加

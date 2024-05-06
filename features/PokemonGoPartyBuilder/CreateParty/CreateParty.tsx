@@ -1,7 +1,7 @@
 "use client";
 
 import PokemonCard from "./PokemonCard.client";
-import PartyEvaluation from '../components/PartyEvaluation';
+import PartyEvaluation from './PartyEvaluation';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
