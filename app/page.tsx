@@ -1,8 +1,12 @@
+"use client";
+
 import Header from '../features/PokemonGoPartyBuilder/Common/Header';
 import SearchBar from '../features/PokemonGoPartyBuilder/CreateParty/SearchBar.client';
-import CreateParty from '../features/PokemonGoPartyBuilder/CreateParty/CreateParty';
+import CreateParty from '../features/PokemonGoPartyBuilder/CreateParty/CreateParty.client';
 import Advertisement from '../features/PokemonGoPartyBuilder/CreateParty/Advertisement';
 import Footer from '../features/PokemonGoPartyBuilder/Common/Footer';
+import { Provider } from 'react-redux';
+import store from "../features/PokemonGoPartyBuilder/App/store";
 
 export default function Home() {
   return (
@@ -11,10 +15,14 @@ export default function Home() {
         <div className="bg-cover bg-center" style={{ backgroundImage: "url('/pokemonGo_backgroundImage_noon.jpeg')" }}>
           <div  className="bg-white bg-opacity-40">
             <div className="h-50">
-              <SearchBar />
+              {/* <Provider store={store}> */}
+                <SearchBar />
+              {/* </Provider> */}
             </div>
             <div className="h-full">
-              <CreateParty />
+              <Provider store={store}>
+                <CreateParty />
+              </Provider>
             </div>
             <div className="h-50">
               <Advertisement />

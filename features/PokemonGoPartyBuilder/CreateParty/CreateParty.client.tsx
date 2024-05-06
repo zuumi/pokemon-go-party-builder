@@ -4,6 +4,7 @@ import PokemonCard from "./PokemonCard.client";
 import PartyEvaluation from './PartyEvaluation';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { add } from "../App/store/modules/partyData";
 
 export default function CreateParty() {
   const [images, setImages] = useState(['', '', '']);
@@ -65,11 +66,13 @@ export default function CreateParty() {
       {images.map((image, index) => (
         <PokemonCard
           key={index}
+          index={index}
           image={image}
           setImage={
             (url: any) => handleSetImage(index, url)
           }
           pokemonGoData={pokemonGoData}
+          actionCreator={add}
         />
       ))}
       </div>
