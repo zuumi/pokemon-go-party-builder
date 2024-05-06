@@ -1,8 +1,8 @@
-import Header from '../components/Common/Header';
-import SearchBar from '../components/SearchBar.client';
-import CreateParty from '../components/CreateParty';
-import Advertisement from '../components/Advertisement';
-import Footer from '../components/Common/Footer';
+import Header from '../features/PokemonGoPartyBuilder/Common/Header';
+import SearchBar from '../features/PokemonGoPartyBuilder/CreateParty/SearchBar.client';
+import CreateParty from '../features/PokemonGoPartyBuilder/CreateParty/CreateParty';
+import Advertisement from '../features/PokemonGoPartyBuilder/CreateParty/Advertisement';
+import Footer from '../features/PokemonGoPartyBuilder/Common/Footer';
 
 export default function Home() {
   return (
