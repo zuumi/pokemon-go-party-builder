@@ -26,12 +26,13 @@ export default function Adovertisement() {
       <div className="container px-6 py-2 bg-blue-100 h-auto mx-auto">
         <div className="bg-white h-auto text-black text-center p-4 my-2 flex overflow-x-auto whitespace-nowrap">
           {advertisementList.map(
-            (advertisement) => {
+            (advertisement, index) => {
               return (
                 <a
                   href={advertisement.productUrl}
                   className="inline-flex items-center justify-center mr-12"
                   style={{ minWidth: advertisement.imageWidth }}
+                  key={index}
                 >
                   <img
                     className="h-[300px]"
