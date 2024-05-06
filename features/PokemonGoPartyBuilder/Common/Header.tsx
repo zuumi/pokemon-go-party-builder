@@ -5,8 +5,8 @@ export default function Header() {
         <div className="font-bold text-xl text-black">PokemonGO Party</div>
         <div className="flex items-center">
           <a href="/" className="text-gray-700 hover:text-gray-900 mx-2">Create</a>
-          <a href="#" className="text-gray-700 hover:text-gray-900 mx-2">List</a>
-          <a href="#" className="text-gray-700 hover:text-gray-900 mx-2">Help</a>
+          {/* <a href="#" className="text-gray-700 hover:text-gray-900 mx-2">List</a>
+          <a href="#" className="text-gray-700 hover:text-gray-900 mx-2">Help</a> */}
         </div>
       </nav>
     </header>
