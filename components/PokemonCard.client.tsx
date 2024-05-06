@@ -38,13 +38,12 @@ export default function PokemonCard({ image, setImage, pokemonGoData }) {
     <div className="bg-white shadow-md rounded px-4 pt-2 w-[500px] h-[820px]">
       <div className="flex">
         <div className="text-black flex mr-auto">{pokemonData && pokemonData.names.Japanese}</div>
-        <div className="text-black flex mr-2">MAXCP(Lv.50):{ pokemonData ? Math.floor(
+        <div className="text-black flex mr-2">{ pokemonData ? `MAXCP(Lv.50):${Math.floor(
           ( (pokemonData.stats.attack+15) 
             * Math.sqrt(pokemonData.stats.stamina+15)
             * Math.sqrt(pokemonData.stats.defense+15)
             * 0.8403
-          )/10
-        ): '0000'}</div>
+          )/10)}`: ''}</div>
       </div>
       <div
           className="bg-cover bg-center h-[300px] w-[300px] mx-auto flex items-center justify-center"
