@@ -6,7 +6,7 @@ export default function PartyEvaluation() {
   const [responses, setResponses] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const state: any = useSelector(state => state.partyData.data);
+  const state: any = useSelector((state: any) => state.partyData.data);
   const selectedPokemonPatry = state.map((pokemon: {index: number,id: number, name: string}) => pokemon.name);
 
   const handleEvaluate = async () => {

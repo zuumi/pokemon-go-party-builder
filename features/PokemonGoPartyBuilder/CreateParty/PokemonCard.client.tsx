@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import PokemonStatus from "./PokemonStatus";
 import { useDispatch } from "react-redux";
 
-export default function PokemonCard({ index, image, setImage, pokemonGoData, actionCreator }) {
+export default function PokemonCard(
+  { index, image, setImage, pokemonGoData, actionCreator }
+  :{ index: any, image: any, setImage: any, pokemonGoData: any, actionCreator: any }
+) {
   const [pokemonId, setPokemonId] = useState<number>(0);
   const [pokemonData, setPokemonData] = useState<any>();
   const dispach = useDispatch();
