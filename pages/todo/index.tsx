@@ -1,73 +1,66 @@
-import { useState, useEffect } from 'react';
+'use client';
+// まずは写経から
+import { useEffect, useState } from "react";
+import "../../app/globals.css";
+
+type Todo = {
+  id: number
+  title: string
+  completed: boolean
+}
 
 export default function Home() {
-  const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState('');
+  const [ inputValue, setInputValue ] = useState<string | null>(null)
+  const [ todos, setTodos] = useState<Todo[]>([])
 
   useEffect(() => {
-    fetch('/api/todos')
-      .then((res) => res.json())
-      .then((data) => setTodos(data));
-  }, []);
-
-  const addTodo = async () => {
-    const res = await fetch('/api/todos', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ title: newTodo }),
-    });
-    const todo = await res.json();
-    setTodos([...todos, todo]);
-    setNewTodo('');
-  };
-
-  const toggleTodo = async (id, completed) => {
-    const res = await fetch('/api/todos', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id, completed }),
-    });
-    const updatedTodo = await res.json();
-    setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
-  };
-
-  const deleteTodo = async (id) => {
-    await fetch('/api/todos', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id }),
-    });
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
+    const getTodo = async () => {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todo`)
+      const todos = await response.json()
+      setTodos(todos)
+    }
+    getTodo()
+  }, [])
 
   return (
-    <div>
-      <h1>TODO App</h1>
-      <input
-        type="text"
-        value={newTodo}
-        onChange={(e) => setNewTodo(e.target.value)}
-      />
-      <button onClick={addTodo}>Add</button>
-      <ul>
+    <>
+      <div className="container mx-auto p-4">
+        <h1 className="text-3xl font-bold mb-4">Todo</h1>
         {todos.map((todo) => (
-          <li key={todo.id}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => toggleTodo(todo.id, !todo.completed)}
-            />
-            {todo.title}
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-          </li>
+          <div className="flex items-center justify-between bg-gray-200 p-2 rounded mb-2" key={todo.id}>
+            <div className="flex items-center">
+              <input type="checkbox" className="mr-2" checked={todo.completed} onChange={()=> console.log('completedを更新する処理')}/>
+              <p className={`text-black ${todo.completed ? 'line-through' : ''}`}>
+                {todo.title}
+              </p>
+            </div>
+            <button
+              onClick={() => console.log('削除する処理')}
+              className='bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded'
+            >
+              削除
+            </button>
+          </div>
         ))}
-      </ul>
-    </div>
-  );
+        <form
+          onSubmit={() => console.log('追加する処理')}
+          className='flex items-center mt-4'
+        >
+          <input
+            type='text'
+            className='border border-gray-400 px-4 py-2 mr-2 rounded text-black'
+            value={inputValue || ''}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder='Todoを入力してください'
+          />
+          <button
+            type='submit'
+            className='bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded'
+          >
+            追加
+          </button>
+        </form>
+      </div>
+    </>
+  )
 }
