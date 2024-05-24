@@ -4,16 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && prisma generate",
+    "postinstall": "prisma generate",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
+    "@prisma/client": "^5.14.0",
     "@reduxjs/toolkit": "^2.2.3",
     "axios": "^1.6.8",
     "js-cookie": "^3.0.5",
     "next": "14.2.3",
+    "pg": "^8.11.5",
+    "prisma": "^5.14.0",
     "react": "^18",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
