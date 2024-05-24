@@ -29,7 +29,35 @@ export default function Home() {
         {todos.map((todo) => (
           <div className="flex items-center justify-between bg-gray-200 p-2 rounded mb-2" key={todo.id}>
             <div className="flex items-center">
-              <input type="checkbox" className="mr-2" checked={todo.completed} onChange={()=> console.log('completedを更新する処理')}/>
+              <input 
+                type="checkbox"
+                className="mr-2"
+                checked={todo.completed}
+                onChange={
+                  async () => {
+                    const response = await fetch(
+                      `${process.env.NEXT_PUBLIC_API_URL}/todo/${todo.id}`,
+                      {
+                        method: 'PATCH',
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ completed: todo.completed }),
+                      }
+                    )
+                    const updateTodo = await response.json()
+                    setTodos(
+                      todos.map((todo) => {
+                        if (todo.id === updateTodo.id) {
+                          return updateTodo
+                        } else {
+                          return todo
+                        }
+                      })
+                    )
+                  }
+                }
+              />
               <p className={`text-black ${todo.completed ? 'line-through' : ''}`}>
                 {todo.title}
               </p>
