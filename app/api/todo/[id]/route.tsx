@@ -17,3 +17,16 @@ export async function PATCH(
   })
   return Response.json(response)
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string }}
+) {
+  const id = Number(params.id)
+  const response = await prisma.todo.delete({
+    where: {
+      id,
+    }
+  })
+  return Response.json(response)
+}
