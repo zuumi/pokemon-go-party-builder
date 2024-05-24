@@ -9,3 +9,14 @@ export async function GET(){
     return Response.json(error)
   }
 }
+
+export async function POST(request: Request) {
+  const { title }: { title: string } = await request.json()
+
+  const response = await prisma.todo.create({
+    data: {
+      title,
+    },
+  })
+  return Response.json(response)
+}

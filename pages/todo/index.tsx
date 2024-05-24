@@ -43,7 +43,26 @@ export default function Home() {
           </div>
         ))}
         <form
-          onSubmit={() => console.log('追加する処理')}
+          onSubmit={
+            async (e) => {
+              e.preventDefault()
+              if (!inputValue) alert('入力してください')
+              const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/todo`,
+                {
+                  method: 'POST',
+                  headers: {
+                    'Const-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ title: inputValue }),
+                }
+              )
+              const newTodo = await response.json()
+
+              setTodos([...todos, newTodo])
+              setInputValue(null)
+            }
+          }
           className='flex items-center mt-4'
         >
           <input
