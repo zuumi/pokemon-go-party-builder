@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_URL = 'https://api.openai.com/v1/';
-const MODEL = 'gpt-4-turbo-2024-04-09';
+const MODEL = 'gpt-4o';
 
 export const gptChat = async (message: string) => {
   const API_KEY = process.env["NEXT_PUBLIC_OPENAI_API_KEY"];
