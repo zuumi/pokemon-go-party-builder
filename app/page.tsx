@@ -1,10 +1,10 @@
 "use client";
 
-import Header from '../features/PokemonGoPartyBuilder/Common/Header';
+import Header from '../components/Header';
 import SearchBar from '../features/PokemonGoPartyBuilder/CreateParty/SearchBar.client';
 import CreateParty from '../features/PokemonGoPartyBuilder/CreateParty/CreateParty.client';
 import Advertisement from '../features/PokemonGoPartyBuilder/CreateParty/Advertisement';
-import Footer from '../features/PokemonGoPartyBuilder/Common/Footer';
+import Footer from '../components/Footer';
 import { Provider } from 'react-redux';
 import store from "../features/PokemonGoPartyBuilder/App/store";
 

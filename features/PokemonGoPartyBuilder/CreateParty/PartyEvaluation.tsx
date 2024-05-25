@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { chat } from './chatService'; // chatService.js から chat 関数をインポート
+import { gptChat } from './ChatService';
 import { useSelector } from "react-redux";
 import Cookies from 'js-cookie';
 
@@ -155,7 +155,7 @@ export default function PartyEvaluation() {
     `;
 
     setIsLoading(true);
-    const apiResponse = await chat(prompt);
+    const apiResponse = await gptChat(prompt);
     if (apiResponse) {
       console.log("API Response:", apiResponse);
       setResponses(apiResponse); // 既存の応答リストに新しい応答を追加

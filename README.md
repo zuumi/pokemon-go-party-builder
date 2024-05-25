@@ -33,3 +33,44 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## ディレクトリ構成について
+
+* app
+  * ルーティングにまつわる主要な部分を構成するディレクトリです。
+* components
+  * 再利用可能なReactコンポーネントを格納するディレクトリです。
+* features
+  * 画面特有の機能やモジュールをまとめるためのディレクトリです。
+* lib
+  * ライブラリやユーティリティ関数を格納するためのディレクトリです。
+* prisma
+  * PrismaORMの関連ファイルを格納するためのディレクトリです。
+* public
+  * 静的ファイル（画像、フォント、その他のアセット）を格納するディレクトリです。
+
+```sh
+$ tree . -d -I node_modules
+.
+├── app
+│   ├── api
+│   │   └── todo
+│   │       └── [id]
+│   └── todo
+├── components
+├── features
+│   └── PokemonGoPartyBuilder
+│       ├── App
+│       │   └── store
+│       │       └── modules
+│       ├── CreateParty
+│       └── DisplayParty
+├── lib
+├── prisma
+│   └── migrations
+│       ├── 20240523153242_init
+│       └── 20240524132028_init
+└── public
+
+19 directories
+```
