@@ -2,6 +2,8 @@
 // まずは写経から
 import { useEffect, useState } from "react";
 import "../../app/globals.css";
+import { useSession } from "next-auth/react";
+import AuthGuard from "@/components/AuthGuard";
 
 type Todo = {
   id: number
@@ -9,9 +11,10 @@ type Todo = {
   completed: boolean
 }
 
-export default function Home() {
-  const [ inputValue, setInputValue ] = useState<string | null>(null)
-  const [ todos, setTodos] = useState<Todo[]>([])
+function Home() {
+  const [ inputValue, setInputValue ] = useState<string | null>(null);
+  const [ todos, setTodos] = useState<Todo[]>([]);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     const getTodo = async () => {
@@ -20,12 +23,20 @@ export default function Home() {
       setTodos(todos)
     }
     getTodo()
-  }, [])
+  }, [status])
+
+  if (status === "loading") {
+    return <div>Loading...</div>
+  }
+  if (status === "unauthenticated") {
+    return <div>ログインして下さい</div>;
+  }
 
   return (
     <>
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4">Todo</h1>
+        <p>Welcome, {session?.user?.name}</p>
         {todos.map((todo) => (
           <div className="flex items-center justify-between bg-gray-200 p-2 rounded mb-2" key={todo.id}>
             <div className="flex items-center">
@@ -124,4 +135,12 @@ export default function Home() {
       </div>
     </>
   )
-}
+};
+
+export default function PageWithAuthGuard() {
+  return (
+    <AuthGuard>
+      <Home />
+    </AuthGuard>
+  );
+};
