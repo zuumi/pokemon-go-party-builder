@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 
 import { redirect } from "next/navigation";
@@ -9,20 +9,33 @@ import { useSession } from "next-auth/react";
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
+  const [ isLoading, setIsLoading ] = useState(false);
+
   useEffect(()=> {
     if (status === "authenticated") {
-      redirect("/");
+      redirect("/todo");
     }
-  }, [session, status]);
+  }, [status]);
 
   const handleLogin = (provider: string) => async (event: React.MouseEvent) => {
     event.preventDefault();
+    setIsLoading(true);
     const result = await signIn(provider);
 
     if (result) {
-      redirect("/");
+      redirect("/todo");
+    } else {
+      setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-100">
+        <div className="loader">Loading....</div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
