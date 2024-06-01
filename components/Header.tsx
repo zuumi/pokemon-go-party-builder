@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { type Session } from "next-auth";
-import { signOut } from "next-auth/react";
+// 開発中のため非表示に。
+// import Image from "next/image";
+// import { signOut } from "next-auth/react";
 
 export default function Header({ session }: { session: Session | null }) {
   return (
@@ -12,7 +13,7 @@ export default function Header({ session }: { session: Session | null }) {
         <div className="font-bold text-xl text-black"><Link href="/">PokemonGO Party</Link></div>
         <div className="flex items-center">
           <a href="/" className="text-gray-700 hover:text-gray-900 mx-2">Create</a>
-          <ul className="flex items-center space-x-4">
+          {/* <ul className="flex items-center space-x-4">
             {session ? (
               <>
                 <li>
@@ -42,7 +43,7 @@ export default function Header({ session }: { session: Session | null }) {
                 </Link>
               </li>
             )}
-          </ul>
+          </ul> */}
         </div>
       </nav>
     </header>
