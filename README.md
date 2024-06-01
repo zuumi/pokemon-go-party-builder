@@ -8,7 +8,7 @@ npm run dev
 # or
 yarn dev
 # or
-pnpm dev
+npm dev
 # or
 bun dev
 ```
@@ -74,3 +74,8 @@ $ tree . -d -I node_modules
 
 19 directories
 ```
+
+## 新しい.envを追加する
+
+Vercel > zumis'project > pokemon-go-party-bulider > setting > Environment Variablesを開く。→ 任意のパラメータ名と値を入力し作成する。
+  * https://vercel.com/zumis-projects/pokemon-go-party-builder/settings/environment-variables
