@@ -79,3 +79,6 @@ $ tree . -d -I node_modules
 
 Vercel > zumis'project > pokemon-go-party-bulider > setting > Environment Variablesを開く。→ 任意のパラメータ名と値を入力し作成する。
   * https://vercel.com/zumis-projects/pokemon-go-party-builder/settings/environment-variables
+
+※GoogleアカウントのAPIについて設定は下記リンクから。
+https://console.cloud.google.com/apis/credentials?project=pokemo-go-builder
