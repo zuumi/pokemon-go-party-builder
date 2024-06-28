@@ -7,6 +7,7 @@ import NextAuthProvider from "./providers";
 
 import Header from "../components/Header";
 import { nextAuthOptions } from "../lib/next-auth-options";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
