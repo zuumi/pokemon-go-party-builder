@@ -30,6 +30,7 @@ export default async function RootLayout({
           <Header session={session} />
           {children}
         </NextAuthProvider>
+        <Analytics/>
       </body>
     </html>
   );
